@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <title>Оценить товар</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <script>
+    function on_drag(){
+      document.getElementById("mark").innerHTML = document.getElementById("slider").value;
+    }
+  </script>
 </head>
-<body>
-$END$
+<body class="container" style="width: 100%">
+
+<header th:insert="blocks/header :: navbar"/>
+<div  style="text-align: center">
+<form th:action="'/goods/rank/' + ${id}" method="post">
+  <img th:src="${good.image}" style="width: 10%" alt="Картинка">
+  <p class="fs-3">Ваша оценка для <b th:text="${good.name}"></b>: </p>
+
+  <details class="mb-4"><i th:text="${good.desc}" class="fs-4"></i></details>
+  <textarea name="text" rows="10" cols="100" placeholder="Ваш отзыв"></textarea>
+  <br>
+  <input name="mark" value="0" id="slider" type="range" oninput="on_drag()" step=".1" min="0" max="5" class="fs-4" required> <b class="fs-5" id="mark">0</b>
+  <br>
+  <button type="submit" class="btn btn-danger my-2">Поставить оценку</button>
+</form>
+</div>
 </body>
 </html>

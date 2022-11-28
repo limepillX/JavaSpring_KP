@@ -4,8 +4,15 @@
             <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">На главную</a></li>
             <li class="nav-item"><a href="/goods" class="nav-link">Товары</a></li>
             <li class="nav-item"><a href="/goods/add" class="nav-link">Добавить товар</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <span th:switch="${as_admin}">
+            <li th:case="false" class="nav-item"><a href="/login" class="nav-link">Войти</a></li>
+            <span th:case="*">
+                <li class="nav-item"><a href="/checkreviews" class="nav-link">Посмотреть все отзывы</a></li>
+                <li class="nav-item"><a href="/showanalytics" class="nav-link">Аналитика товаров</a></li>
+            <li class="nav-item"><a href="/logout" class="nav-link">Админ/Выйти</a></li>
+            </span>
+            
+            </span>
         </ul>
     </header>
 </div>

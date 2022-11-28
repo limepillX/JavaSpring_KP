@@ -1,9 +1,12 @@
 package com.pspkp.kpmain.models;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Good {
@@ -14,10 +17,15 @@ public class Good {
     private String name;
     private String desc;
 
+    private String shortdesc;
+
     private String image;
 
     private float mark;
     private int marks_amount;
+
+    @OneToMany(mappedBy="good")
+    private Set<Review> reviews;
 
     public Good(){
 
@@ -26,6 +34,11 @@ public class Good {
     public Good(String name, String desc, String image) {
         this.name = name;
         this.desc = desc;
+
+        if(desc.length() >= 50){
+            this.shortdesc = desc.substring(0, 50) + "...";
+        } else this.shortdesc = desc;
+
         this.image = image;
         this.mark = 0;
         this.marks_amount = 0;
@@ -75,7 +88,21 @@ public class Good {
         return mark;
     }
 
-    public void setMark(int mark) {
+    public void setMark(float mark) {
         this.mark = mark;
     }
+
+    public String getShortdesc() {
+        return shortdesc;
+    }
+
+    public void setShortdesc(String shortdesc) {
+        this.shortdesc = shortdesc;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+    
 }
+
