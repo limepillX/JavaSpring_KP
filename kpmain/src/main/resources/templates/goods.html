@@ -61,9 +61,9 @@
               alt="звезда"
             />
           </div>
-          <a th:href="'/goods/' + ${good.id}" class="btn btn-primary mb-2"
+          <!-- <a th:href="'/goods/' + ${good.id}" class="btn btn-primary mb-2"
             >Подробнее</a
-          >
+          > -->
           <a
             sec:authorize="hasAuthority('ADMIN')"
             th:href="'/goods/edit/' + ${good.id}"

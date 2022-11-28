@@ -42,7 +42,7 @@ a{
         <td> <a th:href="'/goods/' + ${review.good.id}" th:text="${review.good.name}"></a> </td>
         <td th:utext="${review.text}"></td>
         <td th:text="${review.mark}"></td>
-        <td><a th:text="${review.AuthorName}" th:href="'user/' + ${review.author.id}"></a></td>
+        <td><a th:text="${review.AuthorName}" th:href="'user/' + ${review.author.id}"></a><span class="fst-italic" th:text="' (' +${review.author.status}+')'"></span></td>
     </tr>
 </span>
 </table>

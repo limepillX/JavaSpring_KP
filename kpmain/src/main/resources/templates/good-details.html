@@ -39,6 +39,18 @@
       <a th:href="'/goods/YNrank/' + ${el.id}" class="btn btn-success mb-5"
         >Пройти да/нет опрос</a
       >
+      <a
+            sec:authorize="hasAuthority('ADMIN')"
+            th:href="'/goods/edit/' + ${el.id}"
+            class="btn btn-danger mb-5"
+            >Редактировать</a
+          >
+          <a
+            sec:authorize="hasAuthority('ADMIN')"
+            th:href="'/goods/delete/' + ${el.id}"
+            class="btn btn-danger mb-5"
+            >Удалить</a
+          >
       <span th:each="review : ${reviews}">
         <div class="alert alert-info">
           <b th:text="${review.mark}"></b>
@@ -46,7 +58,8 @@
             style="width: 1.5%"
             src="https://cdn.pixabay.com/photo/2016/03/31/14/48/star-1292832_1280.png"
             alt="звезда"
-          /> - <i th:text="${review.AuthorName}"></i>
+          />
+          - <i th:text="${review.AuthorName}"></i> <span class="fst-italic" th:text="' (' +${review.author.status}+')'"></span>
           <br />
           <i th:utext="${review.text}"></i>
         </div>
