@@ -1,18 +1,40 @@
 <div th:fragment="navbar">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">На главную</a></li>
-            <li class="nav-item"><a href="/goods" class="nav-link">Товары</a></li>
-            <li class="nav-item"><a href="/goods/add" class="nav-link">Добавить товар</a></li>
-            <span th:switch="${as_admin}">
-            <li th:case="false" class="nav-item"><a href="/login" class="nav-link">Войти</a></li>
-            <span th:case="*">
-                <li class="nav-item"><a href="/checkreviews" class="nav-link">Посмотреть все отзывы</a></li>
-                <li class="nav-item"><a href="/showanalytics" class="nav-link">Аналитика товаров</a></li>
-            <li class="nav-item"><a href="/logout" class="nav-link">Админ/Выйти</a></li>
-            </span>
-            
-            </span>
-        </ul>
-    </header>
+  <header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a href="/" class="nav-link active" aria-current="page">На главную</a>
+      </li>
+      <li class="nav-item"><a href="/goods" class="nav-link">Товары</a></li>
+      <li class="nav-item">
+        <a href="/goods/add" class="nav-link">Добавить товар</a>
+      </li>
+      <li sec:authorize="isAnonymous()" class="nav-item">
+        <a href="/login" class="nav-link">Войти</a>
+      </li>
+
+      <li sec:authorize="isAuthenticated()" class="nav-item">
+        <form th:action="@{/logout}" method="post" id="logoutform">
+          <button
+            type="submit"
+            sec:authentication="name"
+            class="nav-link"
+          ></button>
+        </form>
+      </li>
+
+      <span>
+        <li class="nav-item">
+          <a
+            sec:authorize="hasAuthority('ADMIN')"
+            href="/checkreviews"
+            class="nav-link"
+            >Посмотреть все отзывы</a
+          >
+        </li>
+        <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+          <a href="/showanalytics" class="nav-link">Аналитика товаров</a>
+        </li>
+      </span>
+    </ul>
+  </header>
 </div>

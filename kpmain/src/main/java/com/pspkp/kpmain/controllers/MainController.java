@@ -33,28 +33,28 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("as_admin", as_admin);
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String login(Model model) {
+    //     model.addAttribute("as_admin", as_admin);
+    //     return "login";
+    // }
 
-    @PostMapping("/login")
-    public String login_post(Model model, @RequestParam String login, String pass) {
-        if (Objects.equals(login, "admin") && Objects.equals(login, "admin")) {
-            as_admin = true;
-            return "redirect:/goods";
-        } else {
-            return "/login";
-        }
+    // @PostMapping("/login")
+    // public String login_post(Model model, @RequestParam String login, String pass) {
+    //     if (Objects.equals(login, "admin") && Objects.equals(login, "admin")) {
+    //         as_admin = true;
+    //         return "redirect:/goods";
+    //     } else {
+    //         return "/login";
+    //     }
 
-    }
+    // }
 
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        as_admin = false;
-        return "redirect:/goods";
-    }
+    // @GetMapping("/logout")
+    // public String logout(Model model) {
+    //     as_admin = false;
+    //     return "redirect:/goods";
+    // }
 
     @GetMapping("/goods")
     public String goods(Model model) {
