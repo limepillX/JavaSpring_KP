@@ -36,13 +36,17 @@ public class Good {
         this.name = name;
         this.desc = desc;
 
-        if(desc.length() >= 50){
-            this.shortdesc = desc.substring(0, 50) + "...";
-        } else this.shortdesc = desc;
+        getshort();
 
         this.image = image;
         this.mark = 0;
         this.marks_amount = 0;
+    }
+
+    public void getshort(){
+        if(desc.length() >= 50){
+            this.shortdesc = desc.substring(0, 50) + "...";
+        } else this.shortdesc = desc;
     }
 
     public int getMarks_amount() {

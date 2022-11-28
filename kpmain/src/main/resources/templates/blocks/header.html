@@ -17,13 +17,13 @@
           <button
             type="submit"
             sec:authentication="name"
-            class="nav-link"
+            class="nav-link fst-italic"
           ></button>
         </form>
       </li>
 
       <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
-        <a href="/adminpanel" class="nav-link active" aria-current="page">Админка</a>
+        <a href="/adminpanel" class="btn btn-dark" aria-current="page">Админка</a>
       </li>
 
       
