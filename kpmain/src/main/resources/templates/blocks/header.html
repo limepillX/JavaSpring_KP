@@ -22,19 +22,11 @@
         </form>
       </li>
 
-      <span>
-        <li class="nav-item">
-          <a
-            sec:authorize="hasAuthority('ADMIN')"
-            href="/checkreviews"
-            class="nav-link"
-            >Посмотреть все отзывы</a
-          >
-        </li>
-        <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
-          <a href="/showanalytics" class="nav-link">Аналитика товаров</a>
-        </li>
-      </span>
+      <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+        <a href="/adminpanel" class="nav-link active" aria-current="page">Админка</a>
+      </li>
+
+      
     </ul>
   </header>
 </div>

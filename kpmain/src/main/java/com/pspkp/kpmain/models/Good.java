@@ -2,6 +2,7 @@ package com.pspkp.kpmain.models;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Good {
     private float mark;
     private int marks_amount;
 
-    @OneToMany(mappedBy="good")
+    @OneToMany(mappedBy="good", cascade = CascadeType.REMOVE)
     private Set<Review> reviews;
 
     public Good(){

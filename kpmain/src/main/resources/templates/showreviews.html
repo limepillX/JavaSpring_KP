@@ -9,7 +9,7 @@
 <body class="container">
 
 <header th:insert="blocks/header :: navbar"/>
-
+<div sec:authorize="hasAuthority('ADMIN')" id="main">
 <style>
 table{
     width: 100%;
@@ -33,15 +33,19 @@ a{
      <th>
         Оценка
      </th>
+     <th>
+        Автор
+     </th>
 </tr>
 <span th:each="review : ${reviews}">
     <tr>
         <td> <a th:href="'/goods/' + ${review.good.id}" th:text="${review.good.name}"></a> </td>
         <td th:utext="${review.text}"></td>
         <td th:text="${review.mark}"></td>
+        <td><a th:text="${review.AuthorName}" th:href="'user/' + ${review.author.id}"></a></td>
     </tr>
 </span>
 </table>
-
+</div>
 </body>
 </html>

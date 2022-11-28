@@ -1,7 +1,9 @@
 package com.pspkp.kpmain.models;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,20 +24,30 @@ public class Review {
     private float mark;
     private String text;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private User author;
+
     public Review(){
 
     }
 
     
 
-    public Review(Good good, float mark, String text) {
+    public Review(Good good, float mark, String text, User author) {
         this.good = good;
         this.mark = mark;
         this.text = text;
+        this.author = author;
     }
 
 
-
+    public String getAuthorName(){
+        if (author.getUsername() == null){
+            return "unnamed";
+        }
+        return author.getUsername();
+    }
     public float getMark() {
         return mark;
     }
@@ -53,6 +65,12 @@ public class Review {
     }
     public Good getGood(){
         return good;
+    }
+    public User getAuthor() {
+        return author;
+    }
+    public void setAuthor(User author) {
+        this.author = author;
     }
     
     

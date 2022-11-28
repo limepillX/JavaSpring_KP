@@ -35,11 +35,7 @@
 
             </div>
             <a th:href="'/goods/' + ${good.id}" class="btn btn-primary">Подробнее</a>
-            <span th:switch="${as_admin}">
-            <span th:case="true">
-                <a th:href="'/goods/delete/' + ${good.id}" class="btn btn-danger">Удалить</a>
-            </span>
-                </span>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="'/goods/delete/' + ${good.id}" class="btn btn-danger">Удалить</a>
         </div>
     </div>
 </div>
