@@ -12,23 +12,24 @@
   </head>
   <body class="container">
     <header th:insert="blocks/header :: navbar" />
-    <div sec:authorize="hasAuthority('ADMIN')" id="main">
-      <div class="nav-item">
+
+    <ul class="list-group list-group-flush" sec:authorize="hasAuthority('ADMIN')" id="main">
+      <li class="list-group-item"li>
         <a href="/checkreviews" class="nav-link">Посмотреть все отзывы</a>
-      </div>
+      </li>
 
-      <div class="nav-item">
+      <li class="list-group-item"li>
         <a href="/showanalytics" class="nav-link">Аналитика товаров</a>
-      </div>
+      </li>
 
-      <div class="nav-item">
+      <li class="list-group-item"li>
         <a href="/userlist" class="nav-link">Список пользователей</a>
-      </div>
+      </li>
       
-      <div class="nav-item">
+      <li class="list-group-item"li>
         <a href="/showmessages" class="nav-link">Сообщения администратору</a>
-      </div>
+      </li>
 
-    </div>
+    </ul >
   </body>
 </html>

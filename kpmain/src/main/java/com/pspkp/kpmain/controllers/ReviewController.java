@@ -27,7 +27,7 @@ public class ReviewController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/goods/rank/{id}")
+    @GetMapping("/good/rank/{id}")
     public String rank_good(@PathVariable(value = "id") Long id, Model model) {
         model.addAttribute("id", id);
         Good good = goodRepository.findById(id).orElseThrow(NoSuchElementException::new);
@@ -35,7 +35,7 @@ public class ReviewController {
         return "rank-good";
     }
 
-    @PostMapping("/goods/rank/{id}")
+    @PostMapping("/good/rank/{id}")
     public String post_rank_good(@PathVariable(value = "id") Long id, Model model, @RequestParam Float mark,
             @RequestParam String text,
             @AuthenticationPrincipal User user) {

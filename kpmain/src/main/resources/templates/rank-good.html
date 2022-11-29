@@ -15,7 +15,7 @@
 
 <header th:insert="blocks/header :: navbar"/>
 <div  style="text-align: center">
-<form th:action="'/goods/rank/' + ${id}" method="post">
+<form th:action="'/good/rank/' + ${id}" method="post">
   <img th:src="${good.image}" style="width: 10%" alt="Картинка">
   <p class="fs-3">Ваша оценка для <b th:text="${good.name}"></b>: </p>
 

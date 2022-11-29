@@ -59,9 +59,9 @@ public class GoodsController {
 
     @PostMapping("/good/add")
     public String goods_post_add(@RequestParam String name, String desc, String imageurl, @AuthenticationPrincipal User user, Model model) {
-        Good good = new Good(name, desc, imageurl, user);
         user.setCreated(user.getCreated() + 1);
         userRepository.save(user);
+        Good good = new Good(name, desc, imageurl, user);
         goodRepository.save(good);
         return "redirect:/goods";
     }

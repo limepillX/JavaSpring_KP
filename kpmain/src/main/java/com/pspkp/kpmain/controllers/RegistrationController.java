@@ -37,6 +37,8 @@ public class RegistrationController {
         }
         else user.setRoles(Collections.singleton(Role.USER));
         user.setStatus("Рядовой");
+        user.setPassed(0);
+        user.setCreated(0);
         userRepository.save(user);
 
         return "redirect:/login";

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pspkp.kpmain.models.Good;
 import com.pspkp.kpmain.models.Review;
 import com.pspkp.kpmain.models.User;
+import com.pspkp.kpmain.repo.GoodRepository;
 import com.pspkp.kpmain.repo.ReviewRepository;
 import com.pspkp.kpmain.repo.UserRepository;
 
@@ -22,6 +24,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
+    private GoodRepository goodRepository;
 
     @GetMapping("/userlist")
     public String userlist(Model model) {
@@ -35,8 +39,10 @@ public class UserController {
     public String show_user(@PathVariable(value = "id") Long id, Model model) {
         
         Iterable<Review> allReviews = reviewRepository.findAll();
+        Iterable<Good> allGoods = goodRepository.findAll();
         User user = userRepository.findById(id).orElseThrow(NoSuchElementException::new);
         ArrayList<Review> reviews = new ArrayList<>();
+        ArrayList<Good> goods = new ArrayList<>();
 
         for (Review review : allReviews){
             if (review.getAuthor().getUsername().equals( user.getUsername()) ){
@@ -44,8 +50,15 @@ public class UserController {
             }
         }
 
+        for (Good good : allGoods){
+            if (good.getAuthor().getUsername().equals( user.getUsername()) ){
+                goods.add(good);
+            }
+        }
+
         model.addAttribute("user", user);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("goods", goods);
         return "showuser";
     }
 
@@ -85,6 +98,8 @@ public class UserController {
     public String ban_user(@PathVariable(value = "id") Long id, Model model) {
         User user = userRepository.findById(id).orElseThrow(NoSuchElementException::new);
         user.setActive(!user.isActive());
+        if (user.isActive()) user.setStatus("Рядовой");
+        else user.setStatus("Заблокирован");
         userRepository.save(user);
         model.addAttribute("user", user);
         return "redirect:/user/" + user.getId();

@@ -13,10 +13,10 @@
 <p class="fs-1 mt-5" style="background-color: white">Войти</p>
 
 <div th:if="${param.error}">
-  Invalid username and password.
+  Неправильный логин/пароль, или Ваш аккаунт заблокирован
 </div>
 <div th:if="${param.logout}">
-  You have been logged out.
+  Вы успешно вышли
 </div>
 
 <form th:action="@{/login}" method="post">

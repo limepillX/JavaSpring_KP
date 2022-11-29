@@ -13,8 +13,13 @@
   <body class="container">
     <header th:insert="blocks/header :: navbar" />
     <div sec:authorize="hasAuthority('ADMIN')" id="main">
-      <h1>Аналитика товаров</h1>
+      <h1>Аналитика</h1>
 
+      <i class="fs-4" th:text="'Всего создано товаров - ' + ${totalgoods}"></i>
+      <br>
+      <i class="fs-4" th:text="'Всего пройдено опросов - ' + ${totalmarks}"></i>
+<br>
+<div class="fs-3 mt-3">Аналитика оценок товаров</div>
       <div style="text-align: center; height: 400px; width: 70%">
         <canvas id="myChart"></canvas>
         <span hidden id="names" th:text="${names}"></span>
@@ -39,7 +44,7 @@
         options: {
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: false
             }
           }
         }

@@ -11,23 +11,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <style>
-    a{
+      a {
         text-decoration: none;
         font-weight: bold;
         color: gray;
-    }
-    
+      }
     </style>
-
   </head>
   <body class="container">
     <header th:insert="blocks/header :: navbar" />
 
+    <span class="fs-3" th:text="'Пользователь ' + ${user.username}"></span>
+    <br />
     <div sec:authorize="hasAuthority('ADMIN')" id="main">
-      <span
-        class="fs-3"
-        th:text="'Изменение пользователя ' + ${user.username}"
-      ></span>
       <form class="my-3" th:action="'/user/' + ${user.id}" method="post">
         <div class="input-group input-group-sm mb-3">
           <div class="input-group-prepend">
@@ -62,20 +58,20 @@
         </div>
 
         <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm"
-                >Статус</span
-              >
-            </div>
-            <input
-              th:value="${user.status}"
-              name="status"
-              type="text"
-              class="form-control"
-              aria-label="Small"
-              aria-describedby="inputGroup-sizing-sm"
-            />
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"
+              >Статус</span
+            >
           </div>
+          <input
+            th:value="${user.status}"
+            name="status"
+            type="text"
+            class="form-control"
+            aria-label="Small"
+            aria-describedby="inputGroup-sizing-sm"
+          />
+        </div>
 
         <br />
 
@@ -85,54 +81,116 @@
           th:text="'Сохранить информацию о ' + ${user.username}"
         ></button>
       </form>
+    </div>
+    <span th:text="'Прошёл опросов - '+${user.passed}"></span>
+    <br />
+    <span th:text="'Создал товаров - '+${user.created}"></span>
+    <br />
 
-      <span th:text="'Прошёл опросов - '+${user.passed}"></span>
-      <br>
-      <span th:text="'Создал товаров - '+${user.created}"></span>
-      <br>
-
-      <span th:if="${user.active}">
-        <span class="fs-3" style="color: green">Не забанен</span>
-        <br />
-        <a
-          th:href="${user.id} + '/ban'"
-          class="btn btn-danger"
-          th:text="'Забанить ' + ${user.username}"
-        ></a>
-      </span>
-
-      <span th:unless="${user.active}">
-        <span class="fs-3" style="color: red">Забанен</span>
-        <br />
-        <a
-          th:href="${user.id} + '/ban'"
-          class="btn btn-success"
-          th:text="'Разбанить ' + ${user.username}"
-        ></a>
-      </span>
-
+    <span th:if="${user.active}">
+      <span class="fs-3" style="color: green">Не заблокирован</span>
+      <br />
       <a
-        class="btn btn-warning my-3"
-        th:href="${user.id} + '/delete'"
-        th:text="'Удалить аккаунт ' + ${user.username}"
+        sec:authorize="hasAuthority('ADMIN')"
+        th:href="${user.id} + '/ban'"
+        class="btn btn-danger"
+        th:text="'Заблокировать ' + ${user.username}"
       ></a>
+    </span>
+
+    <span th:unless="${user.active}">
+      <span class="fs-3" style="color: red">Заблокирован</span>
+      <br />
+      <a
+        sec:authorize="hasAuthority('ADMIN')"
+        th:href="${user.id} + '/ban'"
+        class="btn btn-success"
+        th:text="'Разбанить ' + ${user.username}"
+      ></a>
+    </span>
+
+    <a
+      sec:authorize="hasAuthority('ADMIN')"
+      class="btn btn-warning my-3"
+      th:href="${user.id} + '/delete'"
+      th:text="'Удалить аккаунт ' + ${user.username}"
+    ></a>
+
+    
+    <br />
+    <span class="fs-3 my-3">Товары</span>
+    <div
+      class="row justify-content-md-center"
+      style="width: 80%; margin: 0 auto"
+    >
+      <div
+        th:each="good : ${goods}"
+        class="col-3 2 card m-3"
+        style="width: 18rem"
+      >
+        <a style="margin: 5% auto" th:href="'/goods/' + ${good.id}">
+          <img
+            th:src="${good.image}"
+            class="card-img-top"
+            style="width: 100%; max-width: 100px"
+            alt="Card image cap"
+          />
+        </a>
+        <div class="card-body">
+          <h5 class="card-title">
+            <a th:href="'/goods/' + ${good.id}" th:text="${good.name}"></a>
+          </h5>
+          <p th:text="${good.shortdesc}" class="card-text" />
+          <div id="mark" class="my-2">
+            <text
+              th:text="'Оценка: ' + ${good.mark} + ' (' + ${good.marks_amount} + ')'"
+              class="card-text"
+            />
+            <img
+              style="width: 10%"
+              src="https://cdn.pixabay.com/photo/2016/03/31/14/48/star-1292832_1280.png"
+              alt="звезда"
+            />
+          </div>
+          <!-- <a th:href="'/goods/' + ${good.id}" class="btn btn-primary mb-2"
+            >Подробнее</a
+          > -->
+          <a
+            sec:authorize="hasAuthority('ADMIN')"
+            th:href="'/goods/edit/' + ${good.id}"
+            class="btn btn-danger"
+            >Редактировать</a
+          >
+          <a
+            sec:authorize="hasAuthority('ADMIN')"
+            th:href="'/goods/delete/' + ${good.id}"
+            class="btn btn-danger"
+            >Удалить</a
+          >
+        </div>
+      </div>
     </div>
 
+
+
+    <br />
     <span class="fs-3 my-3">Отзывы</span>
     <span th:each="review : ${reviews}">
-        <div class="alert alert-info">
-          <b th:text="${review.mark}"></b>
-          <img
-            style="width: 1.5%"
-            src="https://cdn.pixabay.com/photo/2016/03/31/14/48/star-1292832_1280.png"
-            alt="звезда"
-          />
-          <br />
-          <i th:utext="${review.text}"></i>
-          <br>
-          Товар: <a th:href="'../../goods/' + ${review.good.id}"><b th:text="${review.good.name}"></b></a>
-        </div>
-      </span>
-
+      <div class="alert alert-info">
+        <b th:text="${review.mark}"></b>
+        <img
+          style="width: 1.5%"
+          src="https://cdn.pixabay.com/photo/2016/03/31/14/48/star-1292832_1280.png"
+          alt="звезда"
+        />
+        <br />
+        <i th:utext="${review.text}"></i>
+        <br />
+        Товар:
+        <a th:href="'../../goods/' + ${review.good.id}"
+          ><b th:text="${review.good.name}"></b
+        ></a>
+      </div>
+    </span>
   </body>
 </html>

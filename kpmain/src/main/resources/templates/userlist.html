@@ -13,8 +13,8 @@
   <body class="container">
     <header th:insert="blocks/header :: navbar" />
 <div sec:authorize="hasAuthority('ADMIN')" id="main">  
-    <form action="/userlist/s" method="get">
-        <input type="text" name="search" placeholder="Search...">
+    <form class="d-flex" action="/userlist/s" method="get">
+        <input class="form-control" type="text" name="search" placeholder="Search...">
         <button type="submit" class="btn btn-primary">Найти</button>
     </form>
 
@@ -27,7 +27,7 @@
           <th scope="col">Логин</th>
           <th scope="col">Статус</th>
           <th scope="col">Роль</th>
-          <th scope="col">Забанен</th>
+          <th scope="col">Заблокирован</th>
         </tr>
         <tr>
           <th scope="row" th:text="${user.id}"></th>
@@ -35,10 +35,10 @@
           <td th:text="${user.status}"></td>
           <td th:text="${user.roles}"></td>
           <span th:if="${user.active}">
-          <td class="fst-italic" style="color:green">Не забанен</td>
+          <td class="fst-italic" style="color:green">Не заблокирован</td>
           </span>
           <span th:unless="${user.active}">
-          <td class="fst-italic" style="color:red">Забанен</td>
+          <td class="fst-italic" style="color:red">Заблокирован</td>
           </span>
           
         </tr>

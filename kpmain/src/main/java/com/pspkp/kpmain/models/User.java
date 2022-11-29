@@ -41,14 +41,14 @@ public class User implements UserDetails {
 
     }
 
-    public User(String username, String password, boolean active, Set<Role> roles) {
+    public User(String username, String password, boolean active, Set<Role> roles, Integer passed, Integer created) {
         this.username = username;
         this.password = password;
         this.active = active;
         this.status = "Рядовой";
+        this.passed = passed;
+        this.created = created;
         this.roles = roles;
-        this.passed = 0;
-        this.created = 0;
     }
 
     public String getUsername() {
