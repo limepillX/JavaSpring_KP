@@ -47,12 +47,12 @@ public class GoodsController {
         return "redirect:/goods";
     }
 
-    @GetMapping("/goods/add")
+    @GetMapping("/good/add")
     public String goods_add(Model model) {
         return "goods-add";
     }
 
-    @PostMapping("/goods/add")
+    @PostMapping("/good/add")
     public String goods_post_add(@RequestParam String name, String desc, String imageurl, Model model) {
         Good good = new Good(name, desc, imageurl);
         goodRepository.save(good);

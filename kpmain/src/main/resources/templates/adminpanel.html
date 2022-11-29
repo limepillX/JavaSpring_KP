@@ -13,22 +13,22 @@
   <body class="container">
     <header th:insert="blocks/header :: navbar" />
     <div sec:authorize="hasAuthority('ADMIN')" id="main">
-      <span>
-        <div class="nav-item">
-          <a href="/checkreviews" class="nav-link">Посмотреть все отзывы</a>
-        </div>
+      <div class="nav-item">
+        <a href="/checkreviews" class="nav-link">Посмотреть все отзывы</a>
+      </div>
 
-        <div class="nav-item">
-          <a href="/showanalytics" class="nav-link">Аналитика товаров</a>
-        </div>
-
-
-
-      </span>
+      <div class="nav-item">
+        <a href="/showanalytics" class="nav-link">Аналитика товаров</a>
+      </div>
 
       <div class="nav-item">
         <a href="/userlist" class="nav-link">Список пользователей</a>
       </div>
+      
+      <div class="nav-item">
+        <a href="/showmessages" class="nav-link">Сообщения администратору</a>
+      </div>
+
     </div>
   </body>
 </html>
