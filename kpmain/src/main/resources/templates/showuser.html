@@ -86,6 +86,11 @@
         ></button>
       </form>
 
+      <span th:text="'Прошёл опросов - '+${user.passed}"></span>
+      <br>
+      <span th:text="'Создал товаров - '+${user.created}"></span>
+      <br>
+
       <span th:if="${user.active}">
         <span class="fs-3" style="color: green">Не забанен</span>
         <br />

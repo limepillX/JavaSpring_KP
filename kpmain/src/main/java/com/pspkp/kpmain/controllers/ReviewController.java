@@ -16,6 +16,7 @@ import com.pspkp.kpmain.models.Review;
 import com.pspkp.kpmain.models.User;
 import com.pspkp.kpmain.repo.GoodRepository;
 import com.pspkp.kpmain.repo.ReviewRepository;
+import com.pspkp.kpmain.repo.UserRepository;
 
 @Controller
 public class ReviewController {
@@ -23,6 +24,8 @@ public class ReviewController {
     private ReviewRepository reviewRepository;
     @Autowired
     private GoodRepository goodRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/goods/rank/{id}")
     public String rank_good(@PathVariable(value = "id") Long id, Model model) {
@@ -46,6 +49,8 @@ public class ReviewController {
         float newmark = (totalmark + mark) / (marksamount + 1);
         good.setMarks_amount(marksamount + 1);
         good.setMark(newmark);
+        user.setPassed(user.getPassed() + 1);
+        userRepository.save(user);
         Review review = new Review(good, mark, text, user);
         reviewRepository.save(review);
         goodRepository.save(good);
@@ -101,6 +106,9 @@ public class ReviewController {
         good.setMarks_amount(marksamount + 1);
         good.setMark(newmark);
         goodRepository.save(good);
+
+        user.setPassed(user.getPassed() + 1);
+        userRepository.save(user);
 
         reviewRepository.save(new Review(good, mark, text, user));
         return "redirect:/goods/" + id;

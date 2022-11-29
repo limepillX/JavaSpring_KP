@@ -32,6 +32,11 @@
           src="https://cdn.pixabay.com/photo/2016/03/31/14/48/star-1292832_1280.png"
           alt="звезда"
         />
+        <br>
+        <text
+          th:text="'Автор: ' + ${el.author.username}"
+          class="card-text"
+        />
       </div>
       <a th:href="'/goods/rank/' + ${el.id}" class="btn btn-success mb-5"
         >Оценить продукт</a

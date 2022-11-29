@@ -29,6 +29,9 @@ public class User implements UserDetails {
     private boolean active;
     private String status;
 
+    private Integer passed;
+    private Integer created;
+
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
@@ -44,6 +47,8 @@ public class User implements UserDetails {
         this.active = active;
         this.status = "Рядовой";
         this.roles = roles;
+        this.passed = 0;
+        this.created = 0;
     }
 
     public String getUsername() {
@@ -92,6 +97,22 @@ public class User implements UserDetails {
 
     public static Object withDefaultPasswordEncoder() {
         return null;
+    }
+
+    public Integer getPassed() {
+        return passed;
+    }
+
+    public void setPassed(Integer passed) {
+        this.passed = passed;
+    }
+
+    public Integer getCreated() {
+        return created;
+    }
+
+    public void setCreated(Integer created) {
+        this.created = created;
     }
 
     @Override

@@ -4,9 +4,12 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -28,11 +31,15 @@ public class Good {
     @OneToMany(mappedBy="good", cascade = CascadeType.REMOVE)
     private Set<Review> reviews;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private User author;
+
     public Good(){
 
     }
 
-    public Good(String name, String desc, String image) {
+    public Good(String name, String desc, String image, User user) {
         this.name = name;
         this.desc = desc;
 
@@ -41,6 +48,7 @@ public class Good {
         this.image = image;
         this.mark = 0;
         this.marks_amount = 0;
+        this.author = user;
     }
 
     public void getshort(){
@@ -107,6 +115,14 @@ public class Good {
 
     public Set<Review> getReviews() {
         return reviews;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
     
 }

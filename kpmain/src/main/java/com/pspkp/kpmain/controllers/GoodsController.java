@@ -1,9 +1,12 @@
 package com.pspkp.kpmain.controllers;
 
 import com.pspkp.kpmain.models.Good;
+import com.pspkp.kpmain.models.User;
 import com.pspkp.kpmain.repo.GoodRepository;
+import com.pspkp.kpmain.repo.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +23,8 @@ import java.util.Optional;
 public class GoodsController {
     @Autowired
     private GoodRepository goodRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/goods")
     public String goods(Model model) {
@@ -53,8 +58,10 @@ public class GoodsController {
     }
 
     @PostMapping("/good/add")
-    public String goods_post_add(@RequestParam String name, String desc, String imageurl, Model model) {
-        Good good = new Good(name, desc, imageurl);
+    public String goods_post_add(@RequestParam String name, String desc, String imageurl, @AuthenticationPrincipal User user, Model model) {
+        Good good = new Good(name, desc, imageurl, user);
+        user.setCreated(user.getCreated() + 1);
+        userRepository.save(user);
         goodRepository.save(good);
         return "redirect:/goods";
     }
