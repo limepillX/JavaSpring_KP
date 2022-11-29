@@ -1,10 +1,6 @@
 # JavaSpring_KP
 Курсовой проект, написанынй при помощи фреймворка Spring.
 
-#  Workflow
-#### [Made by Федос with Scribe](https://scribehow.com/shared/Workflow__RhDWQyFQRbGJklYtIwPtJg)
-
-
 **1. При переходе на страцицу "Товары" - пользователь может посмотреть все созданные товары**
 
 ![](https://image.scribehow-prod.com/9PkHhUN9M9V5WhKw017DClBDPAqb-QC66GUc_MaLf4Q/zoom:1.2004287245444802/enlarge:true/crop:933:525:nowe:456:223/wm:0.8:nowe:535:290:0.08928571428571429/aHR0cHM6Ly9jb2xvbnktcmVjb3JkZXIuczMuYW1hem9uYXdzLmNvbS9maWxlcy8yMDIyLTExLTI5LzBjZGVhMmJhLTMwZGYtNDEwOS1hNjM5LTY4NmUxMTMyY2ViZC9hc2NyZWVuc2hvdC5qcGVn)
