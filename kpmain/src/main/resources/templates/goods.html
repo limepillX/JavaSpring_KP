@@ -21,7 +21,7 @@
     <header th:insert="blocks/header :: navbar" />
 
     <!--<p th:text="'Hello, ' + ${title} + '!'" />-->
-    <p class="fs-1 mt-5" style="background-color: white">Список товаров</p>
+    <p class="fs-1 mt-5">Список товаров</p>
 
     <form class="d-flex" action="/goods/s" method="get">
       <input class="form-control" type="text" name="search" placeholder="Search..." />
@@ -34,7 +34,7 @@
     >
       <div
         th:each="good : ${goods}"
-        class="col-3 2 card m-3"
+        class="col-3 2 card m-3 shadow-sm"
         style="width: 18rem"
       >
         <a style="margin: 5% auto" th:href="'/goods/' + ${good.id}">

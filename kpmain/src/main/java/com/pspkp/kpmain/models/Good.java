@@ -1,5 +1,6 @@
 package com.pspkp.kpmain.models;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,6 +29,8 @@ public class Good {
     private float mark;
     private int marks_amount;
 
+    private ArrayList<String> recommendations;
+
     @OneToMany(mappedBy="good", cascade = CascadeType.REMOVE)
     private Set<Review> reviews;
 
@@ -49,6 +52,7 @@ public class Good {
         this.mark = 0;
         this.marks_amount = 0;
         this.author = user;
+        this.recommendations = new ArrayList<String>();
     }
 
     public void getshort(){
@@ -123,6 +127,14 @@ public class Good {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public ArrayList<String> getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(ArrayList<String> recommendations) {
+        this.recommendations = recommendations;
     }
     
 }

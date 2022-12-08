@@ -34,15 +34,19 @@ public class GoodsController {
     }
 
     @GetMapping("/goods/{id}")
-    public String good_details(@PathVariable(value = "id") Long id, Model model) {
+    public String good_details(@PathVariable(value = "id") Long id, Model model, @AuthenticationPrincipal User user) {
         if (!goodRepository.existsById(id)) {
             return "Error";
         }
         Optional<Good> good = goodRepository.findById(id);
         ArrayList<Good> res = new ArrayList<>();
         good.ifPresent(res::add);
+        ArrayList<String> recs = res.get(0).getRecommendations();
         model.addAttribute("good", res);
         model.addAttribute("reviews", res.get(0).getReviews());
+        if (user.getUsername().equals(res.get(0).getAuthor().getUsername()) && !recs.isEmpty()){
+            model.addAttribute("recs", recs);
+        }
         return "good-details";
     }
 

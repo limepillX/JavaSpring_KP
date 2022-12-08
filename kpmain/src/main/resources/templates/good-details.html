@@ -68,6 +68,12 @@
         class="btn btn-danger mb-5"
         >Удалить</a
       >
+
+      <div class="alert alert-warning w-50" th:if="${recs}">
+        <p class="my-0">Рекомендации (видны только Вам)</p>
+      <p class="mb-0"  th:each="rec : ${recs}" th:text="'❗' + ${rec}"></p>
+      </div>
+
       <span th:each="review : ${reviews}">
         <div class="alert alert-info">
           <b th:text="${review.mark}"></b>

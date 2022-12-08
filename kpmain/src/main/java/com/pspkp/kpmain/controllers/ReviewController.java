@@ -1,5 +1,6 @@
 package com.pspkp.kpmain.controllers;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,39 @@ public class ReviewController {
         }
 
         Good good = goodRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        ArrayList<String> recs = good.getRecommendations();
+        if (answers[0] == 0){
+            String recommenation = "Следите за качеством товара, покупатели не довольны";
+            if (!recs.contains(recommenation)){
+                recs.add(recommenation);
+            }
+        }
+        if (answers[1] == 0){
+            String recommenation = "Следите за качеством товара, покупатели не советуют товар другу";
+            if (!recs.contains(recommenation)){
+                recs.add(recommenation);
+            }
+        }
+        if (answers[2] == 0){
+            String recommenation = "Следите за браком, товар часто прибывает бракованным";
+            if (!recs.contains(recommenation)){
+                recs.add(recommenation);
+            }
+        }
+        if (answers[3] == 0){
+            String recommenation = "Пересмотрите цену/качество производства товара, качество товара не соответствует его цене";
+            if (!recs.contains(recommenation)){
+                recs.add(recommenation);
+            }
+        }
+        if (answers[4] == 0){
+            
+            String recommenation = "Проверьте описание, возможно товар не соответствует описанию";
+            if (!recs.contains(recommenation)){
+                recs.add(recommenation);
+            }
+        }
+        
 
         int marksamount = good.getMarks_amount();
         float oldmark = good.getMark();

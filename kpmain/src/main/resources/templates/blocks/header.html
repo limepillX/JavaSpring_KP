@@ -1,5 +1,10 @@
 <div th:fragment="navbar">
-  <header class="d-flex justify-content-center py-3">
+  <style>
+    body{
+      background-color: #ffffff;
+    }
+  </style>
+  <header class="d-flex justify-content-center py-3 shadow" style="background-color:#FAF9F6; border-radius:0 0 30px 30px">
     <ul class="nav nav-pills">
       <li class="nav-item">
         <a href="/" class="nav-link active" aria-current="page">На главную</a>
@@ -13,12 +18,15 @@
       </li>
 
       <li sec:authorize="isAuthenticated()" class="nav-item">
+        <a sec:authentication="name" href="/profile" class="nav-link">Выйти</a>
+      </li>
+      <li sec:authorize="isAuthenticated()" class="nav-item">
         <form th:action="@{/logout}" method="post" id="logoutform">
           <u><button
             type="submit"
-            sec:authentication="name"
+            
             class="nav-link fst-italic"
-          ></button> </u>
+          >Выйти</button> </u>
         </form>
       </li>
 
